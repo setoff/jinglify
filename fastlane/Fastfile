@@ -31,9 +31,10 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
+    keychain_name = 'match.keychain'
     keychain_password = SecureRandom.base64
     create_keychain(
-      name: ENV["MATCH_KEYCHAIN_NAME"],
+      name: keychain_name,
       password: keychain_password,
       default_keychain: true,
       unlock: true,
@@ -54,7 +55,7 @@ platform :ios do
     gym(scheme: "jinglify") # Build your app - more options available
     pilot
 
-    delete_keychain(name: ENV["MATCH_KEYCHAIN_NAME"])
+    delete_keychain(name: keychain_name)
   end
 
   desc "Deploy a new version to the App Store"
