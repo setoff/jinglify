@@ -31,22 +31,22 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
-
+    keychain_password = SecureRandom.base64
     create_keychain(
       name: ENV["MATCH_KEYCHAIN_NAME"],
-      password: ENV["MATCH_PASSWORD"],
+      password: keychain_password,
       default_keychain: true,
       unlock: true,
       timeout: 3600,
       add_to_search_list: true
     )
 
+
     match(
       type: "appstore",
       keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
-      keychain_password: ENV["MATCH_PASSWORD"],
-      readonly: true,
-      password: SecureRandom.base64
+      keychain_password: keychain_password,
+      readonly: true
     )
 
     increment_version_number
