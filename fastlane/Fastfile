@@ -45,7 +45,8 @@ platform :ios do
       type: "appstore",
       keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
       keychain_password: ENV["MATCH_PASSWORD"],
-      readonly: true
+      readonly: true,
+      password: SecureRandom.base64
     )
 
     increment_version_number
