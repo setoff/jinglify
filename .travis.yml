@@ -1,0 +1,6 @@
+language: objective-c
+osx_image: xcode8.2
+#xcode_project: jinglify.xcodeproj
+#xcode_scheme: jinglify
+script:
+- fastlane beta
